@@ -642,12 +642,12 @@ MonoBehaviour:
   m_Name: HandTracking Metro
   m_EditorClassIdentifier: 
   m_enabled: 0
-  nameUi: 
-  version: 
-  featureIdInternal: 
-  openxrExtensionStrings: 
-  company: 
-  priority: 0
+  nameUi: Hand Tracking Subsystem
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handtracking
+  openxrExtensionStrings: XR_EXT_hand_tracking
+  company: Unity
+  priority: -100
   required: 0
 --- !u!114 &-5191125240872322840
 MonoBehaviour:
@@ -1948,6 +1948,7 @@ MonoBehaviour:
   - {fileID: -5883110781820701149}
   - {fileID: -5614094181849347511}
   - {fileID: -2664873739308750210}
+  - {fileID: -5304551044866283156}
   m_renderMode: 1
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
