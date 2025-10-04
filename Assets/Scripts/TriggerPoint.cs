@@ -4,37 +4,31 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    public Material OriginalColor;   
-    public Material Red; 
+    // public Material OriginalColor;   
+    // public Material Red; 
     
-    private Renderer rend;  // rend has been used to optimized the performance
+    // private Renderer rend;  // rend has been used to optimized the performance
     
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        
-        // save the initial material
-        // if (rend != null && OriginalColor != null)
-        // {
-        //     rend.material = OriginalColor;
-        // }
+        Debug.Log("Color changing script is working");
+
     }
     
     void OnTriggerEnter(Collider other)
     {
-        // if (other.CompareTag("Player"))
-        // {
-        //     rend.material = Red;  // Switch to triggered material
-        //     Debug.Log("Player is on the platform");
-        // }
+        Debug.Log("The platform is triggered");
+        if (other.CompareTag("Hand"))
+        {
+            Debug.Log("Player is on the platform");
+        } else {
+            Debug.Log("Object is not player");
+        }
     }
     
     void OnTriggerExit(Collider other)
     {
-        // if (other.CompareTag("Player"))
-        // {
-        //     rend.material = OriginalColor;  // Back to normal material
-        //     Debug.Log("Player exit");
-        // }
+        Debug.Log("Exiting...");
+
     }
 }
