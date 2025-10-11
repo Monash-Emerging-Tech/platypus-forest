@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChange : MonoBehaviour
+public class FireflyToggle : MonoBehaviour
 {
-    // public Material OriginalColor;   
-    // public Material Red; 
-    
-    // private Renderer rend;  // rend has been used to optimized the performance
+    [SerializeField] private GameObject fireflyEffect;
     
     void Start()
     {
-        Debug.Log("Color changing script is working");
+        Debug.Log("The script is working");
+        if (fireflyEffect == null)
+        {
+            fireflyEffect = transform.Find("Fx_FirelyFire_03")?.gameObject;
+            
+            if (fireflyEffect == null)
+            {
+                Debug.LogError("Fx_FireflyFire_03 not found!");
+            }
+        }
 
     }
     
@@ -21,6 +27,11 @@ public class ColorChange : MonoBehaviour
         if (other.CompareTag("Hand"))
         {
             Debug.Log("Player is on the platform");
+            if (fireflyEffect != null)
+            {
+                fireflyEffect.SetActive(false);
+                Debug.Log("Firefly effect disabled");
+            }
         } else {
             Debug.Log("Object is not player");
         }
@@ -29,6 +40,10 @@ public class ColorChange : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         Debug.Log("Exiting...");
-
+        if (fireflyEffect != null)
+        {
+            fireflyEffect.SetActive(true);
+            Debug.Log("Firefly effect enabled");
+        }
     }
 }
