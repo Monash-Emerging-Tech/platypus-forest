@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186608028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5c8559f848a44f1ea1b5a6939430197, type: 3}
   m_Name: 
@@ -32960,6 +32960,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
+      propertyPath: platypusSwim
+      value: 
+      objectReference: {fileID: 186608031}
     - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: fireflyEffect
       value: 

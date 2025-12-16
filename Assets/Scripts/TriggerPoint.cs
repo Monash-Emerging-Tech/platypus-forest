@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireflyToggle : MonoBehaviour
 {
     [SerializeField] private GameObject fireflyEffect;
+    [SerializeField] private Swim platypusSwim; 
     
     void Start()
     {
@@ -16,6 +17,16 @@ public class FireflyToggle : MonoBehaviour
             {
                 Debug.LogError("Fx_FireflyFire_03 not found!");
             }
+
+        }
+
+         if (platypusSwim == null)
+        {
+            Debug.LogError("Platypus Swim NOT assigned!");
+        }
+        else
+        {
+            platypusSwim.enabled = false; 
         }
 
     }
@@ -31,6 +42,12 @@ public class FireflyToggle : MonoBehaviour
                 fireflyEffect.SetActive(false);
                 Debug.Log("Firefly effect disabled");
             }
+
+            if (platypusSwim != null)
+            {
+                platypusSwim.enabled = true;  
+            }
+
         } else {
             Debug.Log("Object is not player");
         }
