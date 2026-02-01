@@ -8,7 +8,6 @@ public class FireflyToggle : MonoBehaviour
     
     void Start()
     {
-        Debug.Log("The script is working");
         if (fireflyEffect == null)
         {
             fireflyEffect = transform.Find("Fx_FirelyFire_03")?.gameObject;
