@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    [SerializeField]
+    private SceneController _sceneController;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Hand")) {
-            SceneManager.LoadScene("island2");
+            _sceneController.LoadScene("island2");
         }
     }
 
