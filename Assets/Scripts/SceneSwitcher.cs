@@ -8,11 +8,23 @@ public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField]
     private SceneController _sceneController;
-    // Start is called before the first frame update
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Hand")) {
-            _sceneController.LoadScene("island2");
-        }
-    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log("[SceneSwitcher] Current scene name: " + currentScene);
+
+        // Expecting: Island1, Island2, etc.
+        string numberPart = currentScene.Replace("Island", "");
+        Debug.Log("[SceneSwitcher] Extracted number part: " + numberPart);
+
+        int currentIndex = int.Parse(numberPart);
+        int nextIndex = currentIndex + 1;
+
+        string nextScene = "Island" + nextIndex;
+        Debug.Log("[SceneSwitcher] Loading next scene: " + nextScene);
+
+        _sceneController.LoadScene(nextScene);
+    }
 }
