@@ -24539,6 +24539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teleport Anchor-Island1toIsland2
       objectReference: {fileID: 0}
+    - target: {fileID: 2037003125296684577, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: fireflyEffect
       value: 
@@ -32765,6 +32769,10 @@ PrefabInstance:
     - target: {fileID: 2037003125296684577, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: m_Name
       value: Teleport Anchor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037003125296684577, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: fireflyEffect
