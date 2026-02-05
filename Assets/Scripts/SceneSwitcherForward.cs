@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneSwitcher : MonoBehaviour
+public class SceneSwitcherForward : MonoBehaviour
 {
     [SerializeField]
     private SceneController _sceneController;
