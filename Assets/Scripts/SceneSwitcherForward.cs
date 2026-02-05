@@ -4,14 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneSwitcherForward : MonoBehaviour
+public class SceneSwitcher : MonoBehaviour
 {
-    [SerializeField]
-    private SceneController _sceneController;
 
     private void OnTriggerEnter(Collider other)
     {
-
         string currentScene = SceneManager.GetActiveScene().name;
         Debug.Log("[SceneSwitcher] Current scene name: " + currentScene);
 
@@ -25,6 +22,18 @@ public class SceneSwitcherForward : MonoBehaviour
         string nextScene = "Island" + nextIndex;
         Debug.Log("[SceneSwitcher] Loading next scene: " + nextScene);
 
-        _sceneController.LoadScene(nextScene);
+        // Save that we're going FORWARD, so next scene should spawn player at "Entry"
+        PlayerPrefs.SetString("SpawnPoint", "Entry");
+        PlayerPrefs.Save();
+
+        // Use the singleton instance instead of serialized reference
+        if (SceneController.Instance != null)
+        {
+            SceneController.Instance.LoadScene(nextScene);
+        }
+        else
+        {
+            Debug.LogError("[SceneSwitcher] SceneController.Instance is null!");
+        }
     }
 }

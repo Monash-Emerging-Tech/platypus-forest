@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7795428000810531904}
   - component: {fileID: 5217604736962714182}
   m_Layer: 0
-  m_Name: SwitchSceneArea
+  m_Name: SwitchSceneForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

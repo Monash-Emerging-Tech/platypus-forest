@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcherBackward : MonoBehaviour
 {
-    [SerializeField]
-    private SceneController _sceneController;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +28,18 @@ public class SceneSwitcherBackward : MonoBehaviour
         string previousScene = "Island" + previousIndex;
         Debug.Log("[SceneSwitcherBackward] Loading previous scene: " + previousScene);
 
-        _sceneController.LoadScene(previousScene);
+        // Save that we're going BACKWARD, so previous scene should spawn player at "Exit"
+        PlayerPrefs.SetString("SpawnPoint", "Exit");
+        PlayerPrefs.Save();
+
+        // Use the singleton instance instead of serialized reference
+        if (SceneController.Instance != null)
+        {
+            SceneController.Instance.LoadScene(previousScene);
+        }
+        else
+        {
+            Debug.LogError("[SceneSwitcherBackward] SceneController.Instance is null!");
+        }
     }
 }
