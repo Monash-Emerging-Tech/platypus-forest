@@ -2057,47 +2057,6 @@ MonoBehaviour:
   m_Teleporting:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &186608028 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 45d7629d8ec323d41bf79d8424cf377a, type: 3}
-  m_PrefabInstance: {fileID: 579028777}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &186608029
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186608028}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7e92ad5a4c8c43341a21e96dab869f38, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &186608031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186608028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c8559f848a44f1ea1b5a6939430197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerPoint: {fileID: 2065737080}
-  radius: 2
-  speed: 1.5
 --- !u!1001 &189365858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32963,7 +32922,7 @@ PrefabInstance:
     - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: platypusSwim
       value: 
-      objectReference: {fileID: 186608031}
+      objectReference: {fileID: 0}
     - target: {fileID: 2580106855912929259, guid: 2dbf9e332250edc4481f403a46d51ce3, type: 3}
       propertyPath: fireflyEffect
       value: 
@@ -33116,3 +33075,4 @@ SceneRoots:
   - {fileID: 3676786591012826334}
   - {fileID: 930283260}
   - {fileID: 1541245033}
+  - {fileID: 2065737080}
