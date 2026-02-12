@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Island2.unity
     guid: 5e5179bd2b05ae84994e748aca2c1f8f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Island3.unity
     guid: b9d57869db6fb67419f14bfcd476dfb9
   - enabled: 1
