@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +6,8 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
 
-    // Duration used for scene fade in/out
     [SerializeField]
-    private float _sceneFadeDuration;
+    private float _sceneFadeDuration = 0.5f;
 
     private SceneFade _sceneFade;
 
@@ -26,32 +24,33 @@ public class SceneController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        // Find the SceneFade component's children
+
+        // Find the SceneFade component in children
         _sceneFade = GetComponentInChildren<SceneFade>();
-        
+
         if (_sceneFade != null)
         {
-            // Also make the SceneFade persist
+            // Optional: if your SceneFade is a separate child GameObject you want persistent
             DontDestroyOnLoad(_sceneFade.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("[SceneController] No SceneFade found in children.");
         }
     }
 
     private void OnEnable()
     {
-        // Follow to scene loaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // Unfollow from scene loaded event
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Fade in when a new scene loads
         StartCoroutine(FadeInScene());
     }
 
@@ -63,22 +62,22 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Public method to request a scene change
-    public void LoadScene(string sceneName)
+    // Request a scene change by BUILD INDEX
+    public void LoadScene(int buildIndex)
     {
-        StartCoroutine(LoadSceneCoroutine(sceneName));
+        StartCoroutine(LoadSceneCoroutine(buildIndex));
     }
-    
-    // Handles fading out and loading the new scene
-    private IEnumerator LoadSceneCoroutine(string sceneName)
+
+    // Handles fading out and loading the new scene by BUILD INDEX
+    private IEnumerator LoadSceneCoroutine(int buildIndex)
     {
-        // Fade the screen to black before changing scenes
+        // Fade out before changing scenes
         if (_sceneFade != null)
         {
             yield return _sceneFade.FadeOutCoroutine(_sceneFadeDuration);
         }
 
         // Load the target scene
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(buildIndex);
     }
 }
