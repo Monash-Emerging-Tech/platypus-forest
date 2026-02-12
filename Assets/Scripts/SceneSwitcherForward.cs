@@ -1,35 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log("[SceneSwitcher] Current scene name: " + currentScene);
+        // Get current scene build index
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("[SceneSwitcher] Current build index: " + currentIndex);
 
-        // Expecting: Island1, Island2, etc.
-        string numberPart = currentScene.Replace("Island", "");
-        Debug.Log("[SceneSwitcher] Extracted number part: " + numberPart);
-
-        int currentIndex = int.Parse(numberPart);
+        // Calculate next index
         int nextIndex = currentIndex + 1;
 
-        string nextScene = "Island" + nextIndex;
-        Debug.Log("[SceneSwitcher] Loading next scene: " + nextScene);
+        Debug.Log("[SceneSwitcher] Loading next index: " + nextIndex);
 
-        // Save that we're going FORWARD, so next scene should spawn player at "Entry"
+        // Save spawn direction
         PlayerPrefs.SetString("SpawnPoint", "Entry");
         PlayerPrefs.Save();
 
-        // Use the singleton instance instead of serialized reference
+        // Load via SceneController
         if (SceneController.Instance != null)
         {
-            SceneController.Instance.LoadScene(nextScene);
+            SceneController.Instance.LoadScene(nextIndex);
         }
         else
         {

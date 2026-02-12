@@ -1,41 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcherBackward : MonoBehaviour
 {
+    [SerializeField] private string triggerTag = "Hand"; // change if needed
 
     private void OnTriggerEnter(Collider other)
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log("[SceneSwitcherBackward] Current scene name: " + currentScene);
+        // Optional filter so random colliders don't trigger scene loads
+        if (!other.CompareTag(triggerTag)) return;
 
-        // Expecting: Island1, Island2, etc.
-        string numberPart = currentScene.Replace("Island", "");
-        Debug.Log("[SceneSwitcherBackward] Extracted number part: " + numberPart);
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("[SceneSwitcherBackward] Current build index: " + currentIndex);
 
-        int currentIndex = int.Parse(numberPart);
         int previousIndex = currentIndex - 1;
 
-        // Don't go below Island1
-        if (previousIndex < 1)
+        // Don't go below first scene in Build Settings
+        if (previousIndex < 0)
         {
-            Debug.LogWarning("[SceneSwitcherBackward] Already at Island1, cannot go back!");
+            Debug.LogWarning("[SceneSwitcherBackward] Already at first build scene, cannot go back!");
             return;
         }
 
-        string previousScene = "Island" + previousIndex;
-        Debug.Log("[SceneSwitcherBackward] Loading previous scene: " + previousScene);
+        Debug.Log("[SceneSwitcherBackward] Loading previous index: " + previousIndex);
 
-        // Save that we're going BACKWARD, so previous scene should spawn player at "Exit"
+        // We're going BACK, so spawn at Exit in the previous scene
         PlayerPrefs.SetString("SpawnPoint", "Exit");
         PlayerPrefs.Save();
 
-        // Use the singleton instance instead of serialized reference
         if (SceneController.Instance != null)
         {
-            SceneController.Instance.LoadScene(previousScene);
+            SceneController.Instance.LoadScene(previousIndex);
         }
         else
         {
