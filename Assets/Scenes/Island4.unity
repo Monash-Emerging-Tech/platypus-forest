@@ -1943,6 +1943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LilyPads_02
       objectReference: {fileID: 0}
+    - target: {fileID: 2766394966992529924, guid: 838f8207efadcfd438cda9d67103e9a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.064
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
