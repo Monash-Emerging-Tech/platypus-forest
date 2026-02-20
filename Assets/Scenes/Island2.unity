@@ -117110,7 +117110,7 @@ PrefabInstance:
     - target: {fileID: -7308326040803339093, guid: a95a6195a5c9f094a8e6c9be8110396d, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 25b0e79e58ba62842ad0cca32236870e, type: 2}
+      objectReference: {fileID: 2100000, guid: bbfecacd59ebabd46bd55827740d0771, type: 2}
     - target: {fileID: 919132149155446097, guid: a95a6195a5c9f094a8e6c9be8110396d, type: 3}
       propertyPath: m_Name
       value: WillowTree_01
@@ -161712,13 +161712,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: b1fe58f628853d141a30dcba7785d9c8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 981d7b913f1c4f54198bb5cfa3240995, type: 2}
+    - target: {fileID: -7023974396876390944, guid: b1fe58f628853d141a30dcba7785d9c8, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: c1f04dcceda6b474694137a5aea7dc20, type: 2}
+      objectReference: {fileID: 2100000, guid: 981d7b913f1c4f54198bb5cfa3240995, type: 2}
     - target: {fileID: -7023974396876390944, guid: b1fe58f628853d141a30dcba7785d9c8, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: c1f04dcceda6b474694137a5aea7dc20, type: 2}
+      objectReference: {fileID: 2100000, guid: 981d7b913f1c4f54198bb5cfa3240995, type: 2}
     - target: {fileID: -241587437493983680, guid: b1fe58f628853d141a30dcba7785d9c8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
