@@ -3,7 +3,7 @@ A small treat for our MNET team
 
 ## Features
 
-- **Test feature **: Test feature
+- **Reset Scene **: Holding B or Y for 2 seconds will return the player to the start of Island 1 and reset the scene 
 
 ## Architecture
 
