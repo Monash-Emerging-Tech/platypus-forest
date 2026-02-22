@@ -28,9 +28,9 @@ public class SceneSwitcherBackward : MonoBehaviour
         PlayerPrefs.SetString("SpawnPoint", "Exit");
         PlayerPrefs.Save();
 
-        if (SceneController.Instance != null)
+        if (SceneController.instance != null)
         {
-            SceneController.Instance.LoadScene(previousIndex);
+            SceneController.instance.LoadScene(previousIndex);
         }
         else
         {

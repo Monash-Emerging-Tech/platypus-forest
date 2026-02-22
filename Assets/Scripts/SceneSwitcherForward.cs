@@ -19,9 +19,9 @@ public class SceneSwitcher : MonoBehaviour
         PlayerPrefs.Save();
 
         // Load via SceneController
-        if (SceneController.Instance != null)
+        if (SceneController.instance != null)
         {
-            SceneController.Instance.LoadScene(nextIndex);
+            SceneController.instance.LoadScene(nextIndex);
         }
         else
         {
