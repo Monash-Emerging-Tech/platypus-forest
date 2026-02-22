@@ -29079,7 +29079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7887212436713778576, guid: fb4b616e7acaf3845b99b4a7364d26a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.033597946
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 7887212436713778576, guid: fb4b616e7acaf3845b99b4a7364d26a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30731,6 +30731,10 @@ PrefabInstance:
     - target: {fileID: 4462533371890481292, guid: 5979ec193411abb43a42effcb867b339, type: 3}
       propertyPath: m_Name
       value: SwitchSceneArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
+      propertyPath: nextIndex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47549,6 +47553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneController
       objectReference: {fileID: 0}
+    - target: {fileID: 5259468813245548225, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
+      propertyPath: inputActionReference_SceneResetAction
+      value: 
+      objectReference: {fileID: -7822975843688009092, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 7061545443322433500, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49.7788
@@ -65390,7 +65398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779990896457530337, guid: 9d377a08894a43e4fbe0648436a00b89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.15
+      value: 21.94
       objectReference: {fileID: 0}
     - target: {fileID: 1779990896457530337, guid: 9d377a08894a43e4fbe0648436a00b89, type: 3}
       propertyPath: m_LocalPosition.z

@@ -874,7 +874,7 @@
                     "id": "33754c03-48ec-46ef-9bc6-22ed6bfdd8e8",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -1424,7 +1424,7 @@
                     "name": "Position",
                     "type": "Value",
                     "id": "c4990d70-7b8a-4ce1-b03c-da86716b8352",
-                    "expectedControlType": "Vector3",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -3395,6 +3395,45 @@
                     "action": "Spawn Object",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "XRI Scene Change",
+            "id": "e0e13eff-bd82-417c-a4e3-f394d4fb122a",
+            "actions": [
+                {
+                    "name": "Scene Reset",
+                    "type": "Button",
+                    "id": "369c1789-a852-4f8b-ae8c-a9c167943509",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5a6d6ca1-3ee7-4db6-8274-eb6774670c6d",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scene Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d46231b6-4e97-427b-a189-a3aee3871e7f",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scene Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

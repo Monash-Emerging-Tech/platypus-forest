@@ -224302,6 +224302,10 @@ PrefabInstance:
       value: SwitchSceneForward
       objectReference: {fileID: 0}
     - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
+      propertyPath: nextIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
       propertyPath: _sceneController
       value: 
       objectReference: {fileID: 2018877044}
@@ -246087,6 +246091,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneController
       objectReference: {fileID: 0}
+    - target: {fileID: 5259468813245548225, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
+      propertyPath: inputActionReference_SceneResetAction
+      value: 
+      objectReference: {fileID: -7822975843688009092, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 7061545443322433500, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.41449
