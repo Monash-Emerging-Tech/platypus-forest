@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swim : MonoBehaviour
+public class SwimCircle : MonoBehaviour
 {
      public Transform centerPoint;   
     public float radius = 2f;
