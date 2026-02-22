@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem; 
 
 public class SceneController : MonoBehaviour
 {
@@ -9,10 +10,16 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     private float _sceneFadeDuration = 0.5f;
 
+    [SerializeField]
+    public InputActionReference inputActionReference_SceneResetAction;
+
     private SceneFade _sceneFade;
 
     private void Awake()
     {
+        inputActionReference_SceneResetAction.action.Enable();
+        inputActionReference_SceneResetAction.action.performed += ResetGame;
+
         // Singleton pattern - only one SceneController should exist
         if (Instance == null)
         {
@@ -62,6 +69,11 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    public void ResetGame(InputAction.CallbackContext context)
+    {
+        LoadScene(0);
+    }
+
     // Request a scene change by BUILD INDEX
     public void LoadScene(int buildIndex)
     {
@@ -79,5 +91,11 @@ public class SceneController : MonoBehaviour
 
         // Load the target scene
         SceneManager.LoadScene(buildIndex);
+    }
+
+    private void destroy()
+    {
+        inputActionReference_SceneResetAction.action.Disable();
+        inputActionReference_SceneResetAction.action.performed -= ResetGame;
     }
 }

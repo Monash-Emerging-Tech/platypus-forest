@@ -25,13 +25,8 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.73
   m_AmbientMode: 0
-<<<<<<< HEAD
-  m_SubtractiveShadowColor: {r: 0.6350618, g: 0.68672633, b: 0.81761, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
-=======
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: fe4e130f9947345a2b213cb5038851a2, type: 2}
->>>>>>> origin/add-mountain-decoration-island2
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -221511,7 +221506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_TagString
@@ -224305,6 +224300,10 @@ PrefabInstance:
     - target: {fileID: 4462533371890481292, guid: 5979ec193411abb43a42effcb867b339, type: 3}
       propertyPath: m_Name
       value: SwitchSceneForward
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
+      propertyPath: nextIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
       propertyPath: _sceneController
@@ -246092,6 +246091,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneController
       objectReference: {fileID: 0}
+    - target: {fileID: 5259468813245548225, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
+      propertyPath: inputActionReference_SceneResetAction
+      value: 
+      objectReference: {fileID: -7822975843688009092, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 7061545443322433500, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.41449
