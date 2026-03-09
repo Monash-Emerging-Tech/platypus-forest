@@ -1,27 +1,51 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem; 
 
 public class SceneController : MonoBehaviour
 {
-    public static SceneController Instance;
-
     [SerializeField]
     private float _sceneFadeDuration = 0.5f;
 
+    [SerializeField]
+    public InputActionReference inputActionReference_SceneResetAction;
+
     private SceneFade _sceneFade;
+
+    private static SceneController _instance;
+
+    public static SceneController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<SceneController>();
+
+                //Tell unity not to destroy this object when loading a new scene!
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
 
     private void Awake()
     {
+        inputActionReference_SceneResetAction.action.Enable();
+        inputActionReference_SceneResetAction.action.performed += ResetGame;
+
         // Singleton pattern - only one SceneController should exist
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            _instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
-            Destroy(gameObject);
+            if (this != _instance)
+                Destroy(this.gameObject);
             return;
         }
 
@@ -62,6 +86,11 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    public void ResetGame(InputAction.CallbackContext context)
+    {
+        LoadScene(0);
+    }
+
     // Request a scene change by BUILD INDEX
     public void LoadScene(int buildIndex)
     {
@@ -80,4 +109,5 @@ public class SceneController : MonoBehaviour
         // Load the target scene
         SceneManager.LoadScene(buildIndex);
     }
+
 }

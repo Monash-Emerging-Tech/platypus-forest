@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+
     private void OnTriggerEnter(Collider other)
     {
         // Get current scene build index
@@ -11,7 +12,6 @@ public class SceneSwitcher : MonoBehaviour
 
         // Calculate next index
         int nextIndex = currentIndex + 1;
-
         Debug.Log("[SceneSwitcher] Loading next index: " + nextIndex);
 
         // Save spawn direction
@@ -19,9 +19,9 @@ public class SceneSwitcher : MonoBehaviour
         PlayerPrefs.Save();
 
         // Load via SceneController
-        if (SceneController.Instance != null)
+        if (SceneController.instance != null)
         {
-            SceneController.Instance.LoadScene(nextIndex);
+            SceneController.instance.LoadScene(nextIndex);
         }
         else
         {
