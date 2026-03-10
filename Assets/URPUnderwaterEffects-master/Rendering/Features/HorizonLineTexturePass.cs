@@ -126,8 +126,6 @@ public class HorizonLineTexturePass : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-# var cameraColorTargetIdent = renderer.cameraColorTarget;
-#  pass.Setup(cameraColorTargetIdent);
         renderer.EnqueuePass(pass);
     }
 }

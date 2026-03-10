@@ -109,10 +109,14 @@ public class UnderwaterCaustics : ScriptableRendererFeature
         pass.renderPassEvent = settings.renderPassEvent;
     }
 
+    public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
+    {
+        pass.SetCameraColorTarget(renderer.cameraColorTargetHandle);
+
+    }
+
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        var cameraColorTargetIdent = renderer.cameraColorTarget;
-        pass.Setup(cameraColorTargetIdent);
         renderer.EnqueuePass(pass);
     }
 }
