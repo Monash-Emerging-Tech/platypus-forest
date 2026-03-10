@@ -37,10 +37,14 @@ public class PlayerSpawner : MonoBehaviour
         {
             _player.transform.position = targetSpawn.position;
             _player.transform.rotation = targetSpawn.rotation;
-            Debug.Log("[PlayerSpawner] Player moved to: " + targetSpawn.position);
-        }
+            Debug.Log("Player moved to: " + targetSpawn.position);
 
-        // Clear the saved spawn point
-        PlayerPrefs.DeleteKey("SpawnPoint");
+            // Clear the saved spawn point only after successful spawn
+            PlayerPrefs.DeleteKey("SpawnPoint");
+        }
+        else
+        {
+            Debug.LogWarning("No target spawner");
+        }
     }
 }
