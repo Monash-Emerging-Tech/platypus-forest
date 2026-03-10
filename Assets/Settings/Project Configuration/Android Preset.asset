@@ -76,7 +76,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: f08f79324709258449eae88a96994eb6, type: 2}
     renderPassEvent: 50
     color: {r: 0, g: 0, b: 0, a: 0}
-    FogDensity: 0.25
+    distance: 10
     alpha: 0
     refraction: 0.1
     normalmap: {fileID: 0}
