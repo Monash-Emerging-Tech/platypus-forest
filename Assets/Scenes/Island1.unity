@@ -12147,8 +12147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 904358859}
-  fadeDuration: 2
-  displayTime: 4
 --- !u!1001 &384257149
 PrefabInstance:
   m_ObjectHideFlags: 0
