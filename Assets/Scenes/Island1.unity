@@ -28799,6 +28799,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05b18ec8198b28e49b1d1686110c040c, type: 3}
   m_PrefabInstance: {fileID: 682588011}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &687109547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
+  m_PrefabInstance: {fileID: 7878893784903479393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &687109548 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6914225741531481930, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
@@ -36580,6 +36585,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
+      propertyPath: promptUI
+      value: 
+      objectReference: {fileID: 687109547}
     - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
       propertyPath: nextIndex
       value: 1
@@ -79640,6 +79649,10 @@ PrefabInstance:
     - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_Name
       value: SwitcherTextPrompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6914225741531481930, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_Pivot.x

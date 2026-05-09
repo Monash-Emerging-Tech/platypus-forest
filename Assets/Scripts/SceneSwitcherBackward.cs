@@ -3,11 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcherBackward : MonoBehaviour
 {
-    [SerializeField] private string triggerTag = "Hand"; // change if needed
+    /// Tag the collider must have to trigger the scene load. Default: "Hand"
+    [SerializeField] private string triggerTag = "Hand";
 
+    /// Loads the previous scene when a tagged collider enters the trigger zone
+    /// Saves SpawnPoint = "Exit" so the destination scene spawns the player at its exit point
     private void OnTriggerEnter(Collider other)
     {
-        // Optional filter so random colliders don't trigger scene loads
         if (!other.CompareTag(triggerTag)) return;
 
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
@@ -24,7 +26,7 @@ public class SceneSwitcherBackward : MonoBehaviour
 
         Debug.Log("[SceneSwitcherBackward] Loading previous index: " + previousIndex);
 
-        // We're going BACK, so spawn at Exit in the previous scene
+        // Going back, so spawn at Exit in the previous scene
         PlayerPrefs.SetString("SpawnPoint", "Exit");
         PlayerPrefs.Save();
 
