@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8548239441739775034}
-  - component: {fileID: 6419125224397979090}
   - component: {fileID: 5562564685400512172}
   - component: {fileID: 7064980927478626310}
   m_Layer: 0
@@ -34,14 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6419125224397979090
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7493321823337731958}
-  m_Mesh: {fileID: 2869693487381894663, guid: c19668a861b933b43b61a61a2076c12c, type: 3}
 --- !u!23 &5562564685400512172
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59,9 +50,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
