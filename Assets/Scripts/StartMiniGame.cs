@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class SceneSwitcherForward : MonoBehaviour
+public class StartMiniGame : MonoBehaviour
 {
     /// tag the collider must have to trigger the prompt. Default: "Hand"
     [SerializeField] private string triggerTag = "Hand";
 
     /// UI GameObject shown when the player is in the zone. Must be inactive by default
     [SerializeField] private GameObject promptUI;
+    [SerializeField] private Camera MiniGameCamera;
 
     /// Input action for the confirm button, this can be changed however you want
     [SerializeField] private InputActionReference confirmAction;
@@ -51,20 +52,6 @@ public class SceneSwitcherForward : MonoBehaviour
 
         HidePrompt();
 
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        Debug.Log("[SceneSwitcherForward] Loading next index: DFBDSDGVFGJSHVH" + nextIndex);
-
-        PlayerPrefs.SetString("SpawnPoint", "Entry");
-        PlayerPrefs.Save();
-
-        if (SceneController.instance != null)
-        {
-            SceneController.instance.LoadScene(nextIndex);
-        }
-        else
-        {
-            Debug.LogError("[SceneSwitcherForward] SceneController.Instance is null!");
-        }
     }
     private void Update()
     {
