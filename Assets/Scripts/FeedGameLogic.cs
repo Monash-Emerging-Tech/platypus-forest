@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FeedGameLogic : MonoBehaviour
 {
-    void Update()
+    private bool isGameActive = false;
+    private int score = 0;
+
+    public Boolean isFoodSuitable(Food food)
     {
-        if (Camera.main != null)
-        {
-            transform.LookAt(Camera.main.transform);
-            transform.Rotate(0, 180, 0);
-        }
+        return food.IsSuitable();
     }
+
+
 }
