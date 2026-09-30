@@ -15,10 +15,11 @@ public class SceneSwitcherForward : MonoBehaviour
 
     private bool _playerInZone = false;
 
-    /// Shows the prompt and starts listening for the confirm button
+        /// Shows the prompt and starts listening for the confirm button
     /// when a tagged collider enters the trigger zone
     private void OnTriggerEnter(Collider other)
     {
+
         if (!other.CompareTag(triggerTag)) return;
 
         _playerInZone = true;
@@ -27,10 +28,8 @@ public class SceneSwitcherForward : MonoBehaviour
             promptUI.SetActive(true);
 
         if (confirmAction != null)
-        {
             confirmAction.action.Enable();
-            confirmAction.action.performed += OnConfirmPressed;
-        }
+    
     }
 
     /// Hides the prompt and stops listening when the tagged collider leaves the zone
@@ -42,16 +41,18 @@ public class SceneSwitcherForward : MonoBehaviour
         HidePrompt();
     }
 
+
     /// Called when the confirm button is pressed. Loads the next scene by build index
     /// and saves "Entry" as the spawn point so the destination scene places the player correctly
-    private void OnConfirmPressed(InputAction.CallbackContext context)
+    private void OnConfirmPressed()
     {
+        
         if (!_playerInZone) return;
 
         HidePrompt();
 
         int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        Debug.Log("[SceneSwitcherForward] Loading next index: " + nextIndex);
+        Debug.Log("[SceneSwitcherForward] Loading next index: DFBDSDGVFGJSHVH" + nextIndex);
 
         PlayerPrefs.SetString("SpawnPoint", "Entry");
         PlayerPrefs.Save();
@@ -65,6 +66,16 @@ public class SceneSwitcherForward : MonoBehaviour
             Debug.LogError("[SceneSwitcherForward] SceneController.Instance is null!");
         }
     }
+    private void Update()
+    {
+        if (!_playerInZone) return;
+        if (confirmAction == null) return;
+
+        if (confirmAction.action.WasPressedThisFrame())
+        {
+            OnConfirmPressed();
+        }
+    }
 
     /// Hides the prompt UI and unsubscribes from the confirm action
     private void HidePrompt()
@@ -73,13 +84,13 @@ public class SceneSwitcherForward : MonoBehaviour
             promptUI.SetActive(false);
 
         if (confirmAction != null)
-            confirmAction.action.performed -= OnConfirmPressed;
+            confirmAction.action.Disable();
     }
 
     /// Ensures the confirm action listener is cleaned up when the object is destroyed
     private void OnDestroy()
     {
         if (confirmAction != null)
-            confirmAction.action.performed -= OnConfirmPressed;
+            confirmAction.action.Disable();
     }
 }
