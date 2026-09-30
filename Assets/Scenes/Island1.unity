@@ -36757,6 +36757,10 @@ PrefabInstance:
       propertyPath: nextIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5217604736962714182, guid: 5979ec193411abb43a42effcb867b339, type: 3}
+      propertyPath: confirmAction
+      value: 
+      objectReference: {fileID: 1781555164194001046, guid: 13f02b6f828e2fa459bfb33f0e356e45, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -58519,12 +58523,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8418810740792162898, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -162.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8684453655957817149, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8886355029907506676, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8886355029907506676, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7061545443322433500, guid: a31b8fc3afb72194cbacb81fa0c72e55, type: 3}
       insertIndex: 0
@@ -80272,7 +80285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6914225741531481930, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -211.1
+      value: -159.9
       objectReference: {fileID: 0}
     - target: {fileID: 6914225741531481930, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
