@@ -48098,7 +48098,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.628, y: 4.485}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 41, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &412344079
 MonoBehaviour:
@@ -48120,7 +48120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: A Mammal Like No Other
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -86004,7 +86004,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.628, y: 4.485}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 33.7, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &721217851
 MonoBehaviour:
@@ -86026,7 +86026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Watch Those Spurs!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -140325,7 +140325,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166164322}
   m_LocalRotation: {x: 0.28526875, y: 0.6470096, z: -0.28526855, w: 0.6470102}
-  m_LocalPosition: {x: 0, y: 0, z: 0.004}
+  m_LocalPosition: {x: 0, y: 0, z: -0.023}
   m_LocalScale: {x: 0.063065, y: 0.063065, z: 0.063065}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140333,8 +140333,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 47.586, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14, y: 3.783}
-  m_SizeDelta: {x: 88.29, y: 29.1}
+  m_AnchoredPosition: {x: -0.206, y: 3.723}
+  m_SizeDelta: {x: 86.7, y: 29.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1166164324
 MonoBehaviour:
@@ -140356,7 +140356,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: 'The platypus is a monotreme, a special group of mammals that is neither
+    a marsupial (like a kangaroo) nor a placental mammal (like a dog). It has fur
+    and feeds its babies milk, but it has some very unusual features, like a duck-like
+    bill and a beaver-like tail. Only five monotreme species exist in the world:
+    the platypus and four types of echidna. It''s not a reptile either, even though
+    it can seem like a mix of different animals!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -140383,8 +140388,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 31
+  m_fontSizeBase: 31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -159676,7 +159681,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333563507}
   m_LocalRotation: {x: 0.28526875, y: 0.6470096, z: -0.28526855, w: 0.6470102}
-  m_LocalPosition: {x: 0, y: 0, z: 0.004}
+  m_LocalPosition: {x: 0, y: 0, z: -0.06}
   m_LocalScale: {x: 0.063065, y: 0.063065, z: 0.063065}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159684,7 +159689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 47.586, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14, y: 3.783}
+  m_AnchoredPosition: {x: -0.19, y: 3.74}
   m_SizeDelta: {x: 88.29, y: 29.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1333563509
@@ -159707,7 +159712,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Platypuses are most active at night, from sunset to sunrise. When they
+    dive for dinner, they close their eyes, ears and nostrils, so they can't use
+    sight, hearing or smell. Instead, they use electroreceptors in their bill to
+    pick up the tiny electrical signals made by prey like shrimp, worms and insect
+    larvae. They sweep their bill side to side like a metal detector to find food
+    in the dark, murky water.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -159734,8 +159744,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 31
+  m_fontSizeBase: 31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -187997,7 +188007,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.628, y: 4.485}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 27.7, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556329554
 MonoBehaviour:
@@ -188019,7 +188029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Meet the Puggle!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -211046,7 +211056,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708175330}
   m_LocalRotation: {x: 0.28526875, y: 0.6470096, z: -0.28526855, w: 0.6470102}
-  m_LocalPosition: {x: 0, y: 0, z: 0.004}
+  m_LocalPosition: {x: 0, y: 0, z: -0.066}
   m_LocalScale: {x: 0.063065, y: 0.063065, z: 0.063065}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211054,7 +211064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 47.586, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14, y: 3.783}
+  m_AnchoredPosition: {x: -0.26, y: 3.67}
   m_SizeDelta: {x: 88.29, y: 29.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1708175332
@@ -211077,7 +211087,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: A baby platypus is called a puggle. Puggles are tiny when they hatch, about
+    the size of a jellybean, and are fed milk by their mum in a cosy burrow for several
+    months. They stay safe underground until they're big enough to swim and find
+    food. (Your puggle photo would fit perfectly here!)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -211104,8 +211117,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 31
+  m_fontSizeBase: 31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -253430,7 +253443,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.628, y: 4.485}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 30.21, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061936510
 MonoBehaviour:
@@ -253452,7 +253465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Night-Time Hunter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -258666,7 +258679,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095446760}
   m_LocalRotation: {x: 0.28526875, y: 0.6470096, z: -0.28526855, w: 0.6470102}
-  m_LocalPosition: {x: 0, y: 0, z: 0.004}
+  m_LocalPosition: {x: 0, y: 0, z: -0.039}
   m_LocalScale: {x: 0.063065, y: 0.063065, z: 0.063065}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258674,7 +258687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 47.586, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14, y: 3.783}
+  m_AnchoredPosition: {x: -0.209, y: 3.72}
   m_SizeDelta: {x: 88.29, y: 29.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095446762
@@ -258697,7 +258710,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Male platypuses have venomous spurs on their back legs, which makes them
+    one of the very few venomous mammals. The venom isn't deadly to humans, but it
+    can cause terrible pain. Males mostly use their spurs when competing with other
+    males during breeding season. Please admire platypuses from a distance!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -258724,8 +258740,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 31
+  m_fontSizeBase: 31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
