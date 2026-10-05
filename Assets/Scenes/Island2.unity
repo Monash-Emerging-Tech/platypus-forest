@@ -211891,7 +211891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2818726333637607333, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_text
-      value: Press       to feed platypi
+      value: Press       to feed platypus
       objectReference: {fileID: 0}
     - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_Name
@@ -264809,9 +264809,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2134856595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3fceb8c8555438889c71a5e9097f88, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d84403d2c674871b6a057f9879258e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerTag: Hand
+  promptUI: {fileID: 869566119}
+  confirmAction: {fileID: 1781555164194001046, guid: 13f02b6f828e2fa459bfb33f0e356e45, type: 3}
 --- !u!1001 &2135119910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267319,12 +267322,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6455617586110975518, guid: 558761beb3089f74e9f1fc7d56fc6558, type: 3}
       propertyPath: m_Volume
-      value: 0
+      value: 0.478
       objectReference: {fileID: 0}
     - target: {fileID: 6455617586110975518, guid: 558761beb3089f74e9f1fc7d56fc6558, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 2d11093756869dc408ab2a21f382d6c9, type: 3}
+      objectReference: {fileID: 8300000, guid: f304415c288974f7e9fe85cff1dfe9cf, type: 3}
     - target: {fileID: 7106331984991048365, guid: 558761beb3089f74e9f1fc7d56fc6558, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.581799
