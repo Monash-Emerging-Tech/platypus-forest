@@ -11,7 +11,7 @@ public class FoodOption : MonoBehaviour
     [Header("Scene references")]
     [SerializeField] private FeedingScoreManager scoreManager;
     [SerializeField] private TextMeshPro feedbackText;  // shared text object to show result
-    [SerializeField] private GameObject feedingPanel;       // panel to hide after a choice
+    [SerializeField] private GameObject feedingPanel;       // panel to hide after a choiceWSSSS
 
     // Hook this method to the Button's OnClick() in the Inspector
     public void OnFoodSelected()

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlatypusFeedingTrigger : MonoBehaviour
+public class FeedingGameTrigger : MonoBehaviour
 {
     [SerializeField] private string triggerTag = "Hand";
     [SerializeField] private GameObject promptUI;       // "Press X to feed" prompt
