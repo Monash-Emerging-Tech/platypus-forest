@@ -3,12 +3,14 @@ using TMPro;
 using Unity.XR.CoreUtils;
 
 // Runs the lily pad quiz: shows each question in the sky, puts its 4 answers
-// on the matching row of pads, and judges which pad the player steps on.
+// on the row of pads in front of the player, and judges which pad they step on.
 // Pads report to this script; they never decide anything themselves.
+// The quiz stays hidden until StartQuiz() is called (by a QuizStartTrigger at the
+// end of the sinking lily pad path).
 public class QuizManager : MonoBehaviour
 {
     // The phases the quiz can be in. Pads are only judged while Asking.
-    private enum QuizState { Asking, ShowingFeedback, Finished }
+    private enum QuizState { NotStarted, Asking, Finished }
 
     // --- Set up in the Inspector ---
     [SerializeField] private QuizQuestion[] questions;     // question files, in quiz order
@@ -16,19 +18,23 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TMP_Text questionText;        // the sky text that displays the current question
     [SerializeField] private Collider playerBody;          // the XR Origin's CharacterController: the only thing that can answer
     [SerializeField] private XROrigin xrOrigin;            // the player rig, used to move them
-    [SerializeField] private Transform startPoint;         // where to send players who fail question 1
+    [SerializeField] private Transform startPoint;         // where to send players who fail question 1 (end of the sinking path, on solid ground)
 
     // --- Tracked by code while the game runs ---
-    private int currentQuestion;   // which question (and row) is active, counting from 0
-    private QuizState state;       // what the quiz is doing right now
-    private float ignorePadsUntil; // pads are ignored until this time (stops one wrong answer firing many times)
+    private int currentQuestion;     // which question (and row) is active, counting from 0
+    private QuizState state;         // what the quiz is doing right now
+    private float ignorePadsUntil;   // pads are ignored until this time (stops one wrong answer firing many times)
+    private Vector3 lastSafeSpot;    // the pad the player last answered correctly on (or the start point)
 
     void Start()
     {
-        // Tell all 24 pads to report to this manager.
+        // Tell all pads to report to this manager.
         foreach (GameObject group in questionGroups)
         {
             Answerpad[] pads = group.GetComponentsInChildren<Answerpad>();
+
+            if (pads.Length < 4)
+                Debug.LogError($"QuizManager: row '{group.name}' has {pads.Length} answer pads, needs 4.");
 
             foreach (Answerpad pad in pads)
             {
@@ -36,8 +42,25 @@ public class QuizManager : MonoBehaviour
             }
         }
 
-        // Begin the quiz with the first question.
+        // Nothing is shown until the player reaches the end of the sinking path.
+        state = QuizState.NotStarted;
+        questionText.text = "";
+        HideAllPads();
+    }
+
+    // Called when the player reaches the quiz. Shows question 1 on the first row in front of them.
+    public void StartQuiz()
+    {
+        if (state != QuizState.NotStarted) return;
+
+        lastSafeSpot = startPoint.position;
         ShowQuestion(0);
+    }
+
+    // True if 'other' is the player's body (used by the start trigger too).
+    public bool IsPlayer(Collider other)
+    {
+        return other == playerBody;
     }
 
     // Displays question number 'index': its text in the sky and its 4 answers on its row.
@@ -51,11 +74,12 @@ public class QuizManager : MonoBehaviour
 
         Answerpad[] pads = questionGroups[index].GetComponentsInChildren<Answerpad>();
 
-        // Only the current row is ever visible.
+        // Only the row in front of the player is ever visible.
         HideAllPads();
 
         // Pad i shows answer i and remembers slot number i, so it can be judged later.
-        for (int i = 0; i < 4; i++)
+        int count = Mathf.Min(pads.Length, q.answers.Length);
+        for (int i = 0; i < count; i++)
         {
             pads[i].SetAnswer(q.answers[i], i);
         }
@@ -89,15 +113,14 @@ public class QuizManager : MonoBehaviour
         return sum / pads.Length;
     }
 
-    // Moves the player to 'currentRow' on the pond, facing toward 'nextRow'.
-    // (For question 1, 'currentRow' is the start point, not a row.)
-    void MovePlayerTo(Vector3 currentRow, Vector3 nextRow)
+    // Moves the player to 'landing', facing toward 'lookAt'.
+    void MovePlayerTo(Vector3 landing, Vector3 lookAt)
     {
         // The CharacterController fights direct moves, so switch it off during the move.
         playerBody.enabled = false;
 
         // Face from the landing spot toward the row to retry, kept level.
-        Vector3 facing = nextRow - currentRow;
+        Vector3 facing = lookAt - landing;
         facing.y = 0;
         xrOrigin.MatchOriginUpCameraForward(Vector3.up, facing);
 
@@ -107,12 +130,9 @@ public class QuizManager : MonoBehaviour
         Transform rig = xrOrigin.Origin.transform;
         Vector3 headOffset = xrOrigin.Camera.transform.position - rig.position;
         headOffset.y = 0;
-        rig.position = new Vector3(currentRow.x - headOffset.x, rig.position.y, currentRow.z - headOffset.z);
+        rig.position = new Vector3(landing.x - headOffset.x, rig.position.y, landing.z - headOffset.z);
 
         playerBody.enabled = true;
-
-        // TEMPORARY test log: remove once the teleport bug is solved.
-        Debug.Log("Head after move: " + Vector3.Distance(startPoint.position, xrOrigin.Camera.transform.position) + " m from start");
     }
 
     // Called by an Answerpad whenever anything enters its trigger.
@@ -126,7 +146,7 @@ public class QuizManager : MonoBehaviour
         if (Time.time < ignorePadsUntil) return;
 
         // Ignore steps unless a question is waiting for an answer
-        // (stops double triggers, and steps during feedback or after finishing).
+        // (before the quiz starts, or after finishing).
         if (state != QuizState.Asking) return;
 
         // Ignore pads that aren't in the active row (e.g. stepping back onto an old row).
@@ -137,38 +157,30 @@ public class QuizManager : MonoBehaviour
         // Judge: compare the pad's slot number with the question's correct slot.
         if (pad.AnswerIndex == q.correctIndex)
         {
+            // The player is now standing on this pad: it's where they return to if they get the next one wrong.
+            lastSafeSpot = pad.transform.position;
+
             if (currentQuestion + 1 < questions.Length)
             {
-                // Correct, and there are more questions: move to the next row.
+                // Correct, and there are more questions: the next question's answers
+                // appear on the row in front of the pad the player is standing on.
                 ShowQuestion(currentQuestion + 1);
             }
             else
             {
                 // Correct on the last question: the quiz is complete.
                 state = QuizState.Finished;
+                HideAllPads();
                 questionText.text = "You made it across!";
             }
         }
         else
         {
-            // Wrong answer: send the player back one row (or to the start on question 1).
-            // The question stays the same, so they retry it.
-            Vector3 landing;
-
-            if (currentQuestion == 0)
-            {
-                landing = startPoint.position;
-            }
-            else
-            {
-                landing = RowCenter(currentQuestion - 1);
-            }
-
-            // TEMPORARY test log: remove once the teleport bug is solved.
-            Debug.Log("Wrong on Q" + (currentQuestion + 1) + ": landing " + Vector3.Distance(startPoint.position, landing) + " m from start");
-
+            // Wrong answer: send the player back to the pad they last answered correctly on
+            // (or the start point on question 1). The question stays the same, so they retry it.
+            // Landing on a real pad, not the middle of a row, so they never drop into the water.
             ignorePadsUntil = Time.time + 1f;   // 1 second of ignoring pads
-            MovePlayerTo(landing, RowCenter(currentQuestion));
+            MovePlayerTo(lastSafeSpot, RowCenter(currentQuestion));
         }
     }
 }

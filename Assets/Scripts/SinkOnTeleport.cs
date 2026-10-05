@@ -12,7 +12,8 @@ public class SinkOnTeleport : MonoBehaviour
     [Tooltip("How far below the player's feet to look for the pad.")]
     [SerializeField] private float groundCheckDistance = 0.5f;
 
-    private TeleportationAnchor anchor;
+    // Base class so this works for both TeleportationArea and TeleportationAnchor pads.
+    private BaseTeleportationInteractable anchor;
     private PlayableDirector director;
     private CharacterController playerController;
     private Collider[] padColliders;
@@ -24,7 +25,7 @@ public class SinkOnTeleport : MonoBehaviour
 
     void Awake()
     {
-        anchor = GetComponent<TeleportationAnchor>();
+        anchor = GetComponentInChildren<BaseTeleportationInteractable>();
         director = GetComponent<PlayableDirector>();
         padColliders = GetComponentsInChildren<Collider>();
 
