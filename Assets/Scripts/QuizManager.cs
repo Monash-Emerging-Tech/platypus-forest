@@ -2,29 +2,27 @@ using UnityEngine;
 using TMPro;
 using Unity.XR.CoreUtils;
 
-// Runs the lily pad quiz: shows each question in the sky, puts its 4 answers
-// on the row of pads in front of the player, and judges which pad they step on.
-// Pads report to this script; they never decide anything themselves.
-// The quiz stays hidden until StartQuiz() is called (by a QuizStartTrigger at the
-// end of the sinking lily pad path).
 public class QuizManager : MonoBehaviour
 {
-    // The phases the quiz can be in. Pads are only judged while Asking.
-    private enum QuizState { NotStarted, Asking, Finished }
+    private enum QuizState { NotStarted, Asking, Sinking, Finished }
 
-    // --- Set up in the Inspector ---
     [SerializeField] private QuizQuestion[] questions;     // question files, in quiz order
     [SerializeField] private GameObject[] questionGroups;  // pad rows (Question 1-6), in walking order; row i belongs to question i
-    [SerializeField] private TMP_Text questionText;        // the sky text that displays the current question
+    [SerializeField] private TMP_Text questionText;        // the text that displays the current question, moved above the active row
+    [SerializeField] private float questionHeight = 4f;    // how far above the active row the question floats
     [SerializeField] private Collider playerBody;          // the XR Origin's CharacterController: the only thing that can answer
     [SerializeField] private XROrigin xrOrigin;            // the player rig, used to move them
-    [SerializeField] private Transform startPoint;         // where to send players who fail question 1 (end of the sinking path, on solid ground)
+    [SerializeField] private Transform startPoint;         // where to send players who fail question 1 (solid ground before the first row)
+    [SerializeField] private Collider water;               // the pond (LargeIslandBase (3)): touching it sends the player back
+    [Tooltip("If the player hasn't touched the water this long after a wrong pad starts sinking, send them back anyway.")]
+    [SerializeField] private float sinkFallbackSeconds = 1.5f;
 
-    // --- Tracked by code while the game runs ---
-    private int currentQuestion;     // which question (and row) is active, counting from 0
-    private QuizState state;         // what the quiz is doing right now
-    private float ignorePadsUntil;   // pads are ignored until this time (stops one wrong answer firing many times)
-    private Vector3 lastSafeSpot;    // the pad the player last answered correctly on (or the start point)
+    private int currentQuestion;        // which question (and row) is active, counting from 0
+    private QuizState state;            // what the quiz is doing right now
+    private float ignorePadsUntil;      // pads and water are ignored until this time (stops one event firing many times)
+    private Vector3 lastSafeSpot;       // the pad the player last answered correctly on (or the start point)
+    private SinkOnTeleport sinkingPad;  // the wrong pad currently sinking, if any
+    private float sinkFallbackTime;     // when to give up waiting for the water and send the player back
 
     void Start()
     {
@@ -42,10 +40,36 @@ public class QuizManager : MonoBehaviour
             }
         }
 
-        // Nothing is shown until the player reaches the end of the sinking path.
+        // Nothing is shown until the player reaches the quiz.
         state = QuizState.NotStarted;
+        lastSafeSpot = startPoint.position;
         questionText.text = "";
         HideAllPads();
+    }
+
+    void Update()
+    {
+        if (Time.time < ignorePadsUntil) return;
+
+        // Touching the water at any point sends the player back to safety.
+        if (PlayerInWater())
+        {
+            SendPlayerBack();
+        }
+        // The wrong pad has sunk but the player never reached the water: send them back anyway.
+        else if (state == QuizState.Sinking && Time.time >= sinkFallbackTime)
+        {
+            SendPlayerBack();
+        }
+    }
+
+    void LateUpdate()
+    {
+        // Keep the question turned toward the player (upright, only turning sideways).
+        Vector3 away = questionText.transform.position - xrOrigin.Camera.transform.position;
+        away.y = 0;
+        if (away.sqrMagnitude > 0.001f)
+            questionText.transform.rotation = Quaternion.LookRotation(away);
     }
 
     // Called when the player reaches the quiz. Shows question 1 on the first row in front of them.
@@ -53,7 +77,6 @@ public class QuizManager : MonoBehaviour
     {
         if (state != QuizState.NotStarted) return;
 
-        lastSafeSpot = startPoint.position;
         ShowQuestion(0);
     }
 
@@ -63,7 +86,7 @@ public class QuizManager : MonoBehaviour
         return other == playerBody;
     }
 
-    // Displays question number 'index': its text in the sky and its 4 answers on its row.
+    // Displays question number 'index': its text above its row and its 4 answers on the pads.
     void ShowQuestion(int index)
     {
         currentQuestion = index;
@@ -71,6 +94,7 @@ public class QuizManager : MonoBehaviour
 
         QuizQuestion q = questions[index];
         questionText.text = q.question;
+        questionText.transform.position = RowCenter(index) + Vector3.up * questionHeight;
 
         Answerpad[] pads = questionGroups[index].GetComponentsInChildren<Answerpad>();
 
@@ -113,7 +137,39 @@ public class QuizManager : MonoBehaviour
         return sum / pads.Length;
     }
 
-    // Moves the player to 'landing', facing toward 'lookAt'.
+    // Returns the first solid collider straight below 'from' that isn't part of the player rig.
+    bool SurfaceBelow(Vector3 from, out RaycastHit surface)
+    {
+        surface = default;
+        float nearest = float.MaxValue;
+
+        foreach (RaycastHit hit in Physics.RaycastAll(from, Vector3.down, 50f, ~0, QueryTriggerInteraction.Ignore))
+        {
+            if (hit.collider.transform.IsChildOf(xrOrigin.transform)) continue;
+
+            if (hit.distance < nearest)
+            {
+                nearest = hit.distance;
+                surface = hit;
+            }
+        }
+
+        return nearest < float.MaxValue;
+    }
+
+    bool PlayerInWater()
+    {
+        if (water == null) return false;
+
+        Vector3 head = xrOrigin.Camera.transform.position;
+        if (!SurfaceBelow(head + Vector3.up * 2f, out RaycastHit surface)) return false;
+        if (surface.collider != water) return false;
+
+        float feetHeight = xrOrigin.Origin.transform.position.y;
+        return feetHeight <= surface.point.y + 0.2f;
+    }
+
+    // Moves the player onto the surface at 'landing', facing toward 'lookAt'.
     void MovePlayerTo(Vector3 landing, Vector3 lookAt)
     {
         // The CharacterController fights direct moves, so switch it off during the move.
@@ -122,17 +178,39 @@ public class QuizManager : MonoBehaviour
         // Face from the landing spot toward the row to retry, kept level.
         Vector3 facing = lookAt - landing;
         facing.y = 0;
-        xrOrigin.MatchOriginUpCameraForward(Vector3.up, facing);
+        if (facing.sqrMagnitude > 0.001f)
+            xrOrigin.MatchOriginUpCameraForward(Vector3.up, facing);
 
-        // Move the rig so the player's head ends up above the landing spot.
-        // Done in world space: measure how far the head sits from the rig's base (sideways only),
-        // then place the rig so that offset lands on the target. The rig keeps its current height.
+        // Stand on top of whatever is at the landing spot (the player may have sunk below it).
+        float height = landing.y;
+        if (SurfaceBelow(landing + Vector3.up * 5f, out RaycastHit ground))
+            height = ground.point.y;
+
         Transform rig = xrOrigin.Origin.transform;
         Vector3 headOffset = xrOrigin.Camera.transform.position - rig.position;
         headOffset.y = 0;
-        rig.position = new Vector3(landing.x - headOffset.x, rig.position.y, landing.z - headOffset.z);
+        rig.position = new Vector3(landing.x - headOffset.x, height, landing.z - headOffset.z);
 
         playerBody.enabled = true;
+    }
+
+    void SendPlayerBack()
+    {
+        // Stop the sinking pad dragging the player along after the move.
+        if (sinkingPad != null)
+        {
+            sinkingPad.StopCarrying();
+            sinkingPad = null;
+        }
+
+        if (state == QuizState.Sinking)
+            state = QuizState.Asking;
+
+        // Look toward the row to retry (the first row if the quiz hasn't started).
+        int row = state == QuizState.NotStarted ? 0 : currentQuestion;
+
+        ignorePadsUntil = Time.time + 1f;   // 1 second of ignoring pads and water
+        MovePlayerTo(lastSafeSpot, RowCenter(row));
     }
 
     // Called by an Answerpad whenever anything enters its trigger.
@@ -141,12 +219,8 @@ public class QuizManager : MonoBehaviour
         // Ignore anything that isn't the player's body (hands, animals, objects).
         if (other != playerBody) return;
 
-        // Ignore pads briefly after a wrong answer: switching the CharacterController off and on
-        // makes Unity report the player "entering" the pad again, which would repeat the answer.
         if (Time.time < ignorePadsUntil) return;
 
-        // Ignore steps unless a question is waiting for an answer
-        // (before the quiz starts, or after finishing).
         if (state != QuizState.Asking) return;
 
         // Ignore pads that aren't in the active row (e.g. stepping back onto an old row).
@@ -157,13 +231,13 @@ public class QuizManager : MonoBehaviour
         // Judge: compare the pad's slot number with the question's correct slot.
         if (pad.AnswerIndex == q.correctIndex)
         {
-            // The player is now standing on this pad: it's where they return to if they get the next one wrong.
+            // The correct pad stays up. The player is standing on it now,
+            // so it's where they return to if they get the next one wrong.
             lastSafeSpot = pad.transform.position;
 
             if (currentQuestion + 1 < questions.Length)
             {
-                // Correct, and there are more questions: the next question's answers
-                // appear on the row in front of the pad the player is standing on.
+
                 ShowQuestion(currentQuestion + 1);
             }
             else
@@ -176,11 +250,15 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            // Wrong answer: send the player back to the pad they last answered correctly on
-            // (or the start point on question 1). The question stays the same, so they retry it.
-            // Landing on a real pad, not the middle of a row, so they never drop into the water.
-            ignorePadsUntil = Time.time + 1f;   // 1 second of ignoring pads
-            MovePlayerTo(lastSafeSpot, RowCenter(currentQuestion));
+
+            state = QuizState.Sinking;
+            sinkingPad = pad.GetComponentInParent<SinkOnTeleport>();
+            sinkFallbackTime = Time.time + sinkFallbackSeconds;
+
+            if (sinkingPad != null)
+                sinkingPad.Sink();
+            else
+                SendPlayerBack();   // pad can't sink: send them back straight away
         }
     }
 }

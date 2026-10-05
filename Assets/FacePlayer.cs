@@ -12,8 +12,10 @@ public class FacePlayer : MonoBehaviour
     void LateUpdate()
     {
         if (vrCamera == null) return;
-        Vector3 direction = vrCamera.position - transform.position;
+        // TextMeshPro reads correctly from behind its +Z, so point +Z away from the player (otherwise the text is mirrored).
+        Vector3 direction = transform.position - vrCamera.position;
         direction.y = 0;
-        transform.rotation = Quaternion.LookRotation(direction);
+        if (direction.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(direction);
     }
 }
