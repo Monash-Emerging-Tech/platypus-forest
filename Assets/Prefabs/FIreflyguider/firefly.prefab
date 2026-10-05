@@ -5425,7 +5425,7 @@ MonoBehaviour:
   stopDistance: 4
   hoverHeight: 0.3
   hoverSpeed: 3
-  hoverDuration: 8
+  hoverDuration: 6
 --- !u!1 &8712416081380214003
 GameObject:
   m_ObjectHideFlags: 0
