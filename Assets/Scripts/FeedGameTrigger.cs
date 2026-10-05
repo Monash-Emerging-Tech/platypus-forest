@@ -2,24 +2,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class FeedGameTrigger : MonoBehaviour
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlatypusFeedingTrigger : MonoBehaviour
 {
-    /// tag the collider must have to trigger the prompt. Default: "Hand"
     [SerializeField] private string triggerTag = "Hand";
-
-    /// UI GameObject shown when the player is in the zone. Must be inactive by default
-    [SerializeField] private GameObject promptUI;
-
-    /// Input action for the confirm button, this can be changed however you want
+    [SerializeField] private GameObject promptUI;       // "Press X to feed" prompt
+    [SerializeField] private GameObject feedingPanel;    // the food-choice UI panel (inactive by default)
     [SerializeField] private InputActionReference confirmAction;
 
     private bool _playerInZone = false;
 
-        /// Shows the prompt and starts listening for the confirm button
-    /// when a tagged collider enters the trigger zone
     private void OnTriggerEnter(Collider other)
     {
-
         if (!other.CompareTag(triggerTag)) return;
 
         _playerInZone = true;
@@ -29,55 +25,44 @@ public class FeedGameTrigger : MonoBehaviour
 
         if (confirmAction != null)
             confirmAction.action.Enable();
-    
     }
 
-    /// Hides the prompt and stops listening when the tagged collider leaves the zone
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag(triggerTag)) return;
 
         _playerInZone = false;
         HidePrompt();
+        HideFeedingPanel();
     }
 
-
-    /// Called when the confirm button is pressed. Loads the next scene by build index
-    /// and saves "Entry" as the spawn point so the destination scene places the player correctly
-    private void OnConfirmPressed()
-    {
-        
-        if (!_playerInZone) return;
-
-        HidePrompt();
-
-
-    }
     private void Update()
     {
-        if (!_playerInZone) return;
+        if (!_playerInZone || feedingPanel.activeSelf) return;
         if (confirmAction == null) return;
 
         if (confirmAction.action.WasPressedThisFrame())
         {
-            OnConfirmPressed();
+            ShowFeedingPanel();
         }
     }
 
-    /// Hides the prompt UI and unsubscribes from the confirm action
+    private void ShowFeedingPanel()
+    {
+        HidePrompt();
+        if (feedingPanel != null)
+            feedingPanel.SetActive(true);
+    }
+
+    public void HideFeedingPanel()
+    {
+        if (feedingPanel != null)
+            feedingPanel.SetActive(false);
+    }
+
     private void HidePrompt()
     {
         if (promptUI != null)
             promptUI.SetActive(false);
-
-        if (confirmAction != null)
-            confirmAction.action.Disable();
-    }
-
-    /// Ensures the confirm action listener is cleaned up when the object is destroyed
-    private void OnDestroy()
-    {
-        if (confirmAction != null)
-            confirmAction.action.Disable();
     }
 }
