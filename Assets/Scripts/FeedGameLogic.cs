@@ -8,6 +8,9 @@ public class FeedGameLogic : MonoBehaviour
     private bool isGameActive = false;
     private int score = 0;
 
+    public bool IsGameActive => isGameActive;
+    public int Score => score;
+
     public Boolean isFoodSuitable(Food food)
     {
         return food.IsSuitable();

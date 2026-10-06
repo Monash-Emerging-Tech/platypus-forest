@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class FeedingGameTrigger : MonoBehaviour
 {
     [SerializeField] private string triggerTag = "Hand";

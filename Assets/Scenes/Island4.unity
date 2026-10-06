@@ -957,7 +957,6 @@ GameObject:
   - component: {fileID: 109675122}
   - component: {fileID: 109675125}
   - component: {fileID: 109675124}
-  - component: {fileID: 109675123}
   m_Layer: 0
   m_Name: Quiz Question Text
   m_TagString: Untagged
@@ -984,14 +983,6 @@ RectTransform:
   m_AnchoredPosition: {x: -266.29758, y: 54.343433}
   m_SizeDelta: {x: 32.427063, y: 9.728119}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!33 &109675123
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109675121}
-  m_Mesh: {fileID: 0}
 --- !u!114 &109675124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,7 +2966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_TagString

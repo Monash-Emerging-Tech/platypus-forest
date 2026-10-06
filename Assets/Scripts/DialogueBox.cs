@@ -15,6 +15,8 @@ public class DialogueBox : MonoBehaviour
     private bool isTyping = false;
     private string fullText = "";
 
+    public bool IsTyping => isTyping;
+
     void Awake()
     {
         if (boxRoot != null) boxRoot.SetActive(false);

@@ -107,7 +107,8 @@ public class csColorChangerinSampleScene : MonoBehaviour {
 
         foreach (ParticleSystem _ParticleSystem in ParticleSystems)
         {
-            _ParticleSystem.startColor = co;
+            var main = _ParticleSystem.main;
+            main.startColor = co;
         }
     }
 }
