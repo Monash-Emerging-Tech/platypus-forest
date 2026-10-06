@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_Name
-      value: SwitcherTextPrompt Variant
+      value: extPrompt VarianttBack
       objectReference: {fileID: 0}
     - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_IsActive
