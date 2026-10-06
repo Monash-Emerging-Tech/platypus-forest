@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -17,11 +18,16 @@ public class WaterRespawn : MonoBehaviour
     [Tooltip("On: the top of Water Area is the water level for the whole scene, so going below it anywhere respawns the player. " +
              "Off: only inside the Water Area box counts.")]
     [SerializeField] private bool waterLevelEverywhere = true;
+    [Tooltip("Fades the screen to black while the player is moved. Uses the scene's SceneFade (from the SceneController) if left empty.")]
+    [SerializeField] private SceneFade screenFade;
+    [Tooltip("Seconds to fade to black, and again to fade back in.")]
+    [SerializeField] private float fadeDuration = 0.4f;
 
     private Collider water;
     private CharacterController playerBody;
     private Transform lastStandingPad;   // the last pad ticked Is Correct the player stood on
     private float ignoreUntil;
+    private bool respawning;             // true while fading out, moving and fading back in
 
     void Awake()
     {
@@ -44,11 +50,15 @@ public class WaterRespawn : MonoBehaviour
             Debug.LogError("WaterRespawn: no XR Origin found in the scene.");
         else
             playerBody = xrOrigin.GetComponent<CharacterController>();
+
+        // The fade object is switched off between fades, so include inactive objects in the search.
+        if (screenFade == null)
+            screenFade = FindFirstObjectByType<SceneFade>(FindObjectsInactive.Include);
     }
 
     void Update()
     {
-        if (xrOrigin == null || Time.time < ignoreUntil) return;
+        if (xrOrigin == null || respawning || Time.time < ignoreUntil) return;
 
         if (SurfaceBelow(xrOrigin.Camera.transform.position + Vector3.up * 2f, out RaycastHit surface))
         {
@@ -95,10 +105,33 @@ public class WaterRespawn : MonoBehaviour
             return;
         }
 
-        // Stop any sinking pad from dragging the player along after the move.
+        StartCoroutine(RespawnWithFade(target));
+    }
+
+    // Fade to black, move the player while the screen is dark, then fade back in.
+    IEnumerator RespawnWithFade(Transform target)
+    {
+        respawning = true;
+
+        // Stop any sinking pad from dragging the player along.
         foreach (SinkOnTeleport sinking in FindObjectsByType<SinkOnTeleport>(FindObjectsSortMode.None))
             sinking.StopCarrying();
 
+        if (screenFade != null)
+            yield return screenFade.FadeOutCoroutine(fadeDuration);
+
+        MovePlayerTo(target);
+        yield return null;   // let the player settle on the pad before revealing it
+
+        if (screenFade != null)
+            yield return screenFade.FadeInCoroutine(fadeDuration);
+
+        ignoreUntil = Time.time + cooldown;
+        respawning = false;
+    }
+
+    void MovePlayerTo(Transform target)
+    {
         // The CharacterController fights direct moves, so switch it off during the move.
         if (playerBody != null) playerBody.enabled = false;
 
@@ -114,8 +147,6 @@ public class WaterRespawn : MonoBehaviour
         rig.position = new Vector3(landing.x - headOffset.x, height, landing.z - headOffset.z);
 
         if (playerBody != null) playerBody.enabled = true;
-
-        ignoreUntil = Time.time + cooldown;
     }
 
     // The first solid collider straight below 'from' that isn't part of the player rig.
