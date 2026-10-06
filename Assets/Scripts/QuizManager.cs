@@ -6,7 +6,8 @@ public class QuizManager : MonoBehaviour
 {
     private enum QuizState { NotStarted, Asking, Sinking, Finished }
 
-    [SerializeField] private QuizQuestion[] questions;     // question files, in quiz order
+    [Tooltip("The question for each row, in walking order. Each pad's answer text and Is Correct tick box are on its Display Answer component.")]
+    [TextArea] [SerializeField] private string[] questionTexts;
     [SerializeField] private GameObject[] questionGroups;  // pad rows (Question 1-6), in walking order; row i belongs to question i
     [SerializeField] private TMP_Text questionText;        // the text that displays the current question, moved above the active row
     [SerializeField] private float questionHeight = 4f;    // how far above the active row the question floats
@@ -33,6 +34,12 @@ public class QuizManager : MonoBehaviour
 
             if (pads.Length < 4)
                 Debug.LogError($"QuizManager: row '{group.name}' has {pads.Length} answer pads, needs 4.");
+
+            int correct = 0;
+            foreach (Answerpad pad in pads)
+                if (IsCorrect(pad)) correct++;
+            if (correct != 1)
+                Debug.LogError($"QuizManager: row '{group.name}' has {correct} pads ticked Is Correct, needs exactly 1.");
 
             foreach (Answerpad pad in pads)
             {
@@ -92,8 +99,7 @@ public class QuizManager : MonoBehaviour
         currentQuestion = index;
         state = QuizState.Asking;   // now waiting for the player to pick a pad
 
-        QuizQuestion q = questions[index];
-        questionText.text = q.question;
+        questionText.text = index < questionTexts.Length ? questionTexts[index] : "";
         questionText.transform.position = RowCenter(index) + Vector3.up * questionHeight;
 
         Answerpad[] pads = questionGroups[index].GetComponentsInChildren<Answerpad>();
@@ -101,12 +107,19 @@ public class QuizManager : MonoBehaviour
         // Only the row in front of the player is ever visible.
         HideAllPads();
 
-        // Pad i shows answer i and remembers slot number i, so it can be judged later.
-        int count = Mathf.Min(pads.Length, q.answers.Length);
-        for (int i = 0; i < count; i++)
+        // Each pad shows the answer typed into its Display Answer component.
+        for (int i = 0; i < pads.Length; i++)
         {
-            pads[i].SetAnswer(q.answers[i], i);
+            DisplayAnswer display = pads[i].GetComponentInParent<DisplayAnswer>();
+            pads[i].SetAnswer(display != null ? display.Answer : "", i);
         }
+    }
+
+    // True if this pad's Display Answer is ticked Is Correct.
+    static bool IsCorrect(Answerpad pad)
+    {
+        DisplayAnswer display = pad.GetComponentInParent<DisplayAnswer>();
+        return display != null && display.IsCorrect;
     }
 
     // Hides the labels on every pad in every row.
@@ -226,16 +239,14 @@ public class QuizManager : MonoBehaviour
         // Ignore pads that aren't in the active row (e.g. stepping back onto an old row).
         if (!pad.transform.IsChildOf(questionGroups[currentQuestion].transform)) return;
 
-        QuizQuestion q = questions[currentQuestion];
-
-        // Judge: compare the pad's slot number with the question's correct slot.
-        if (pad.AnswerIndex == q.correctIndex)
+        // Judge: the pad ticked Is Correct is the right answer.
+        if (IsCorrect(pad))
         {
             // The correct pad stays up. The player is standing on it now,
             // so it's where they return to if they get the next one wrong.
             lastSafeSpot = pad.transform.position;
 
-            if (currentQuestion + 1 < questions.Length)
+            if (currentQuestion + 1 < questionGroups.Length)
             {
 
                 ShowQuestion(currentQuestion + 1);
