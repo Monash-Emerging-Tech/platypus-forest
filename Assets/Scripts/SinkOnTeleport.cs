@@ -24,12 +24,14 @@ public class SinkOnTeleport : MonoBehaviour
     private bool sinking;
     private bool carryingPlayer;
     private Vector3 lastPadPosition;
+    private DisplayAnswer displayAnswer;   // if this pad has one and it's marked correct, it never sinks when stepped on
 
     void Awake()
     {
         anchor = GetComponentInChildren<BaseTeleportationInteractable>();
         director = GetComponent<PlayableDirector>();
         padColliders = GetComponentsInChildren<Collider>();
+        displayAnswer = GetComponentInChildren<DisplayAnswer>();
 
         if (playerOrigin == null)
             playerOrigin = FindFirstObjectByType<XROrigin>();
@@ -63,7 +65,7 @@ public class SinkOnTeleport : MonoBehaviour
 
     void Update()
     {
-        if (playerOrigin == null || !sinkWhenSteppedOn)
+        if (playerOrigin == null || !SinksWhenSteppedOn())
             return;
 
         // Walking onto the pad: start sinking the moment the player steps on (not every frame they stay on).
@@ -91,8 +93,15 @@ public class SinkOnTeleport : MonoBehaviour
 
     private void OnTeleporting(TeleportingEventArgs args)
     {
-        if (sinkWhenSteppedOn)
+        if (SinksWhenSteppedOn())
             StartSink();
+    }
+
+    // The right answer stays up; every other pad sinks when stepped on (if sinkWhenSteppedOn is ticked).
+    private bool SinksWhenSteppedOn()
+    {
+        bool isRightAnswer = displayAnswer != null && displayAnswer.IsCorrect;
+        return sinkWhenSteppedOn && !isRightAnswer;
     }
 
     // Sinks the pad (carrying the player if they're on it), whatever sinkWhenSteppedOn is set to.
