@@ -1,0 +1,349 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &350651025593590304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3017466012381705227}
+  m_Layer: 0
+  m_Name: Firefly Row 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3017466012381705227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350651025593590304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.51, y: 9.1, z: -10.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3998511152383317144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7853239534849953031}
+  m_Layer: 0
+  m_Name: Firefly Row 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7853239534849953031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998511152383317144}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32.48, y: 9.1, z: 3.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5126074208720439929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3754757022747883132}
+  m_Layer: 0
+  m_Name: FireflyGuide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3754757022747883132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5126074208720439929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -749.3147, y: 54.487633, z: -174.1651}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5947357921880748102}
+  - {fileID: 6125123224393377466}
+  - {fileID: 6995590251941899627}
+  - {fileID: 9121319995706236793}
+  - {fileID: 3017466012381705227}
+  - {fileID: 7853239534849953031}
+  - {fileID: 5606266933773003673}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8064778976523576767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6125123224393377466}
+  m_Layer: 0
+  m_Name: Firefly Row 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6125123224393377466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064778976523576767}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.17332616, z: -0, w: 0.9848645}
+  m_LocalPosition: {x: 14.72, y: 9.1, z: -26.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 19.963, z: 0}
+--- !u!1 &8172582875695302770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5606266933773003673}
+  m_Layer: 0
+  m_Name: Firefly Row 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5606266933773003673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172582875695302770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.1, y: 9.1, z: 3.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8627834105878920625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9121319995706236793}
+  m_Layer: 0
+  m_Name: Firefly Row 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9121319995706236793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8627834105878920625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.7, y: 9.1, z: -25.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8818755937679316259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6995590251941899627}
+  m_Layer: 0
+  m_Name: Firefly Row 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6995590251941899627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818755937679316259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.5, y: 9.1, z: -16.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3754757022747883132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &613917794959215169
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3754757022747883132}
+    m_Modifications:
+    - target: {fileID: 2834510402631546432, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834510402631546432, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.881836
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.592369
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.247726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277740439372245018, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      propertyPath: m_Name
+      value: firefly
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7277740439372245018, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6185385528856399212}
+  m_SourcePrefab: {fileID: 100100000, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+--- !u!4 &5947357921880748102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6488649672278374919, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+  m_PrefabInstance: {fileID: 613917794959215169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7816745532051874395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7277740439372245018, guid: f0f5781f7a127c84ebaf889caeadfa8c, type: 3}
+  m_PrefabInstance: {fileID: 613917794959215169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6185385528856399212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816745532051874395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67952e27a6662d64c8001be0c60f8612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stops:
+  - hoverPoint: {fileID: 6125123224393377466}
+    message: What type of mammal is a platypus?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  - hoverPoint: {fileID: 6995590251941899627}
+    message: What does a platypus use to find food underwater?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  - hoverPoint: {fileID: 9121319995706236793}
+    message: What is a baby platypus called?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  - hoverPoint: {fileID: 3017466012381705227}
+    message: What special feature do male platypuses have?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  - hoverPoint: {fileID: 7853239534849953031}
+    message: When are platypuses most active?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  - hoverPoint: {fileID: 5606266933773003673}
+    message: What makes monotremes like platypus unique?
+    answersRow: {fileID: 0}
+    unlockedByPad: {fileID: 0}
+  dialogueBox: {fileID: 0}
+  xrOrigin: {fileID: 0}
+  speed: 3
+  wobbleAmount: 0.3
+  wobbleSpeed: 2
+  stopDistance: 0.3
+  hoverHeight: 0.3
+  hoverSpeed: 2
