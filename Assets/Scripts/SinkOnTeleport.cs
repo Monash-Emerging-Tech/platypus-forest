@@ -11,8 +11,11 @@ public class SinkOnTeleport : MonoBehaviour
     [SerializeField] private float delay = 0.2f;
     [Tooltip("How far below the player's feet to look for the pad.")]
     [SerializeField] private float groundCheckDistance = 0.5f;
+    [Tooltip("On: sinks as soon as the player steps or teleports onto it. Off: only sinks when Sink() is called (quiz answer pads, sunk by QuizManager on a wrong answer).")]
+    [SerializeField] private bool sinkWhenSteppedOn = true;
 
-    private TeleportationAnchor anchor;
+    // Base class so this works for both TeleportationArea and TeleportationAnchor pads.
+    private BaseTeleportationInteractable anchor;
     private PlayableDirector director;
     private CharacterController playerController;
     private Collider[] padColliders;
@@ -24,7 +27,7 @@ public class SinkOnTeleport : MonoBehaviour
 
     void Awake()
     {
-        anchor = GetComponent<TeleportationAnchor>();
+        anchor = GetComponentInChildren<BaseTeleportationInteractable>();
         director = GetComponent<PlayableDirector>();
         padColliders = GetComponentsInChildren<Collider>();
 
@@ -60,7 +63,7 @@ public class SinkOnTeleport : MonoBehaviour
 
     void Update()
     {
-        if (playerOrigin == null)
+        if (playerOrigin == null || !sinkWhenSteppedOn)
             return;
 
         // Walking onto the pad: start sinking the moment the player steps on (not every frame they stay on).
@@ -86,7 +89,17 @@ public class SinkOnTeleport : MonoBehaviour
         return false;
     }
 
-    private void OnTeleporting(TeleportingEventArgs args) => StartSink();
+    private void OnTeleporting(TeleportingEventArgs args)
+    {
+        if (sinkWhenSteppedOn)
+            StartSink();
+    }
+
+    // Sinks the pad (carrying the player if they're on it), whatever sinkWhenSteppedOn is set to.
+    public void Sink() => StartSink();
+
+    // Stops moving the player with the pad, e.g. once they've been teleported off it.
+    public void StopCarrying() => carryingPlayer = false;
 
     private void StartSink()
     {

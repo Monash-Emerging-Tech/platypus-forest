@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 2941105064202360967}
   m_LocalRotation: {x: 0, y: 0.95194244, z: 0, w: 0.30627695}
   m_LocalPosition: {x: 0, y: 0, z: -0.8771635}
-  m_LocalScale: {x: 0.0747194, y: 0.0747194, z: 0.0747194}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.03812095, y: 0.59200066}
   m_SizeDelta: {x: 20, y: 5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!23 &5889230716707310834
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -129,12 +129,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 24
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
