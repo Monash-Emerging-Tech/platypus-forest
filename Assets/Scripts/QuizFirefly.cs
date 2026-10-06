@@ -11,6 +11,10 @@ public class QuizFireflyStop
     [Tooltip("What the firefly says here (the question for the row in front of the player).")]
     [TextArea(2, 5)] public string message;
 
+    [Tooltip("The row of pads whose answers appear with this question (e.g. the 'Question 1' row object). " +
+             "Leave empty for a stop with no answers, like a final 'well done'.")]
+    public Transform answersRow;
+
     [Tooltip("The firefly flies here once the player stands on this pad (the StandingLilypad of the row before). " +
              "Leave empty on the first stop, so it's asked as soon as the game starts.")]
     public Transform unlockedByPad;
@@ -53,6 +57,10 @@ public class QuizFirefly : MonoBehaviour
         if (guide != null) guide.enabled = false;
 
         hoverBasePosition = transform.position;
+
+        // Every row's answers start hidden; each appears when the firefly asks its question.
+        foreach (QuizFireflyStop stop in stops)
+            SetAnswersVisible(stop.answersRow, false);
     }
 
     void Update()
@@ -73,6 +81,10 @@ public class QuizFirefly : MonoBehaviour
 
     void GoTo(int index)
     {
+        // The row just answered is done with: hide its answers.
+        if (current >= 0)
+            SetAnswersVisible(stops[current].answersRow, false);
+
         current = index;
         flying = true;
         if (dialogueBox != null) dialogueBox.Hide();
@@ -109,6 +121,17 @@ public class QuizFirefly : MonoBehaviour
 
         if (dialogueBox != null && !string.IsNullOrEmpty(stops[current].message))
             dialogueBox.ShowMessage(stops[current].message);
+
+        // Reveal this question's answers on its row.
+        SetAnswersVisible(stops[current].answersRow, true);
+    }
+
+    static void SetAnswersVisible(Transform row, bool visible)
+    {
+        if (row == null) return;
+
+        foreach (DisplayAnswer pad in row.GetComponentsInChildren<DisplayAnswer>(true))
+            pad.SetAnswerVisible(visible);
     }
 
     void Hover()

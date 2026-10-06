@@ -18,4 +18,15 @@ public class DisplayAnswer : MonoBehaviour
         if (answerText != null && !string.IsNullOrEmpty(answer))
             answerText.text = answer;
     }
+
+    // Shows or hides this pad's answer label (used by QuizFirefly to reveal one row at a time).
+    public void SetAnswerVisible(bool visible)
+    {
+        if (answerText == null) return;
+
+        if (visible && !string.IsNullOrEmpty(answer))
+            answerText.text = answer;
+
+        answerText.gameObject.SetActive(visible);
+    }
 }

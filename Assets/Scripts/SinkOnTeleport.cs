@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 
 [RequireComponent(typeof(PlayableDirector))]
@@ -32,6 +33,7 @@ public class SinkOnTeleport : MonoBehaviour
         director = GetComponent<PlayableDirector>();
         padColliders = GetComponentsInChildren<Collider>();
         displayAnswer = GetComponentInChildren<DisplayAnswer>();
+        BindTimelineToThisPad();
 
         if (playerOrigin == null)
             playerOrigin = FindFirstObjectByType<XROrigin>();
@@ -45,6 +47,30 @@ public class SinkOnTeleport : MonoBehaviour
             Debug.LogError($"SinkOnTeleport: no collider found on {name}!");
 
         Debug.Log($"SinkOnTeleport ready on {name} ({padColliders.Length} colliders, player: {(playerOrigin ? playerOrigin.name : "none")})");
+    }
+
+    // Every sinking pad shares one Timeline (SinkLilipadTimeline). The Timeline doesn't say which object
+    // to move, so point any unassigned animation track at this pad (adding an Animator if needed).
+    // That way a new sinking pad only needs the Timeline in its Playable Director, no Timeline-window setup.
+    private void BindTimelineToThisPad()
+    {
+        if (!(director.playableAsset is TimelineAsset timeline))
+        {
+            Debug.LogWarning($"SinkOnTeleport: {name}'s Playable Director has no Timeline, so it won't move when it sinks.");
+            return;
+        }
+
+        foreach (TrackAsset track in timeline.GetOutputTracks())
+        {
+            if (!(track is AnimationTrack) || director.GetGenericBinding(track) != null)
+                continue;
+
+            Animator animator = GetComponent<Animator>();
+            if (animator == null)
+                animator = gameObject.AddComponent<Animator>();
+
+            director.SetGenericBinding(track, animator);
+        }
     }
 
     void OnEnable()
