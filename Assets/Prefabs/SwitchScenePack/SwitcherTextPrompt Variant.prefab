@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwitcherTextPrompt Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5797101111153588460, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6914225741531481930, guid: a1b9f38b51872084fb68949a7123a151, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
