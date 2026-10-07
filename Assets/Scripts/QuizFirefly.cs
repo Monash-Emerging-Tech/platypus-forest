@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -20,9 +21,6 @@ public class QuizFireflyStop
     public Transform unlockedByPad;
 }
 
-// Put this on the firefly in Island 4. It asks one question per row:
-// the spawn point asks row 1, row 1's StandingLilypad asks row 2, and so on.
-// The question stays up until the player stands on the next StandingLilypad.
 public class QuizFirefly : MonoBehaviour
 {
     [Tooltip("In order: row 1's question first. Add one more at the end for a 'well done' message if you like.")]
@@ -40,8 +38,33 @@ public class QuizFirefly : MonoBehaviour
     [SerializeField] private float hoverHeight = 0.3f;
     [SerializeField] private float hoverSpeed = 2f;
 
+    [Header("Ending")]
+    [Tooltip("The ending starts once the player stands on this (e.g. the last row's StandingLilypad, or LargeIslandBase (5) itself). " +
+             "Leave empty for no ending.")]
+    [SerializeField] private Transform endingUnlockedByPad;
+    [Tooltip("Where the firefly flies for the goodbye, e.g. LargeIslandBase (5).")]
+    [SerializeField] private Transform endingHoverPoint;
+    [Tooltip("Added to the ending hover point's position, so the firefly hovers above the island instead of inside it.")]
+    [SerializeField] private Vector3 endingHoverOffset = new Vector3(0f, 2f, 0f);
+    [Tooltip("Said one after another once the firefly reaches the end island.")]
+    [SerializeField, TextArea(1, 3)] private string[] endingMessages =
+    {
+        "Congratulations! You did it!",
+        "Thank you for trying our little game!",
+        "I hope you had a great time and learn many things!",
+        "I will see you around!",
+    };
+    [Tooltip("How long each goodbye message stays up after it has finished typing.")]
+    [SerializeField] private float secondsPerMessage = 3f;
+    [Tooltip("Fades the screen to black at the end. Uses the scene's SceneFade (from the SceneController) if left empty.")]
+    [SerializeField] private SceneFade screenFade;
+    [SerializeField] private float fadeDuration = 2f;
+    [Tooltip("How long to stay on the black screen before the game stops.")]
+    [SerializeField] private float secondsOnBlack = 1f;
+
     private int current = -1;          // which stop the firefly is on (-1 = not started)
     private bool flying;               // true while travelling to the current stop
+    private bool ending;               // true once the firefly is heading to (or at) the end island
     private Vector3 hoverBasePosition;
 
     void Awake()
@@ -61,14 +84,23 @@ public class QuizFirefly : MonoBehaviour
         // Every row's answers start hidden; each appears when the firefly asks its question.
         foreach (QuizFireflyStop stop in stops)
             SetAnswersVisible(stop.answersRow, false);
+
+        // The fade object is switched off between fades, so include inactive objects in the search.
+        if (screenFade == null)
+            screenFade = FindFirstObjectByType<SceneFade>(FindObjectsInactive.Include);
     }
 
     void Update()
     {
-        // Move on when the player reaches the next stop's pad.
-        int next = current + 1;
-        if (next < stops.Length && IsUnlocked(stops[next]))
-            GoTo(next);
+        if (!ending)
+        {
+            // Move on when the player reaches the next stop's pad.
+            int next = current + 1;
+            if (next < stops.Length && IsUnlocked(stops[next]))
+                GoTo(next);
+            else if (next >= stops.Length && endingUnlockedByPad != null && PlayerIsStandingOn(endingUnlockedByPad))
+                StartEnding();
+        }
 
         if (flying) Fly();
         else Hover();
@@ -94,9 +126,28 @@ public class QuizFirefly : MonoBehaviour
             Arrive();
     }
 
+    void StartEnding()
+    {
+        if (current >= 0)
+            SetAnswersVisible(stops[current].answersRow, false);
+
+        ending = true;
+        flying = true;
+        if (dialogueBox != null) dialogueBox.Hide();
+
+        // No hover point: say goodbye right where it is.
+        if (endingHoverPoint == null)
+            Arrive();
+    }
+
+    Vector3 FlyTarget()
+    {
+        return ending ? endingHoverPoint.position + endingHoverOffset : stops[current].hoverPoint.position;
+    }
+
     void Fly()
     {
-        Vector3 toTarget = stops[current].hoverPoint.position - transform.position;
+        Vector3 toTarget = FlyTarget() - transform.position;
 
         if (toTarget.magnitude <= stopDistance)
         {
@@ -119,11 +170,50 @@ public class QuizFirefly : MonoBehaviour
         flying = false;
         hoverBasePosition = transform.position;
 
+        if (ending)
+        {
+            StartCoroutine(PlayEnding());
+            return;
+        }
+
         if (dialogueBox != null && !string.IsNullOrEmpty(stops[current].message))
             dialogueBox.ShowMessage(stops[current].message);
 
         // Reveal this question's answers on its row.
         SetAnswersVisible(stops[current].answersRow, true);
+    }
+
+    // Says each goodbye message in turn, then fades to black and stops the game.
+    IEnumerator PlayEnding()
+    {
+        foreach (string message in endingMessages)
+        {
+            if (dialogueBox != null)
+            {
+                dialogueBox.ShowMessage(message);
+                yield return null;   // let the typing start
+                while (dialogueBox.IsTyping) yield return null;
+            }
+
+            yield return new WaitForSeconds(secondsPerMessage);
+        }
+
+        if (screenFade != null)
+            yield return screenFade.FadeOutCoroutine(fadeDuration);
+        else
+            Debug.LogWarning("QuizFirefly: no SceneFade found, so the screen can't fade to black.");
+
+        yield return new WaitForSeconds(secondsOnBlack);
+        StopGame();
+    }
+
+    static void StopGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     static void SetAnswersVisible(Transform row, bool visible)
