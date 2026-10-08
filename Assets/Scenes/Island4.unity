@@ -1186,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_TagString
@@ -3734,6 +3734,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1246850411595346824, guid: f29ebe7e540a2af4782f5af52f65ab8b, type: 3}
+      propertyPath: m_text
+      value: 'This Island requires one to teleport onto a lilypad. Here is how you
+        can teleport:
+
+
+        Point your controller to your desired lilypad then
+        push the right joystick forward to teleport. Have fun and good luck!'
+      objectReference: {fileID: 0}
     - target: {fileID: 8487117327770532460, guid: f29ebe7e540a2af4782f5af52f65ab8b, type: 3}
       propertyPath: m_Name
       value: Info_Board
@@ -6043,7 +6052,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 83976760}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3270367274282457146, guid: dc55260ef6a65c642af4846f79acb663, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3754757022747883132, guid: dc55260ef6a65c642af4846f79acb663, type: 3}
       insertIndex: -1
