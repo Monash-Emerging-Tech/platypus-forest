@@ -1,10 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class SceneSwitcherForward : MonoBehaviour
 {
-    /// tag the collider must have to trigger the prompt. Default: "Hand"
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(2f);
+        var cam = Camera.main;
+        Debug.Log("[PosCheck] Camera: " + (cam != null ? cam.transform.position.ToString() : "none")
+                + " | Zone: " + transform.position);
+    }
+        /// tag the collider must have to trigger the prompt. Default: "Hand"
     [SerializeField] private string triggerTag = "Hand";
 
     /// UI GameObject shown when the player is in the zone. Must be inactive by default
@@ -19,6 +27,8 @@ public class SceneSwitcherForward : MonoBehaviour
     /// when a tagged collider enters the trigger zone
     private void OnTriggerEnter(Collider other)
     {
+
+        Debug.Log("[Teleporter] Trigger hit by: " + other.name + " | tag: " + other.tag);
 
         if (!other.CompareTag(triggerTag)) return;
 
@@ -92,5 +102,14 @@ public class SceneSwitcherForward : MonoBehaviour
     {
         if (confirmAction != null)
             confirmAction.action.Disable();
+    }
+    private void OnEnable()
+    {
+        Debug.Log("[Teleporter] Forward script active in scene: " + gameObject.scene.name);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("[Teleporter] Overlapping: " + other.name + " | tag: " + other.tag);
     }
 }
