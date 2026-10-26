@@ -50,8 +50,11 @@ public class SceneSwitcherBackward : MonoBehaviour
         if (!_playerInZone) return;
 
         HidePrompt();
+        
 
         int nextIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        Debug.Log("Active: " + SceneManager.GetActiveScene().name +
+          " | loading index " + nextIndex);
         Debug.Log("[SceneSwitcherBackward] Loading previous index: " + nextIndex);
 
         PlayerPrefs.SetString("SpawnPoint", "Entry");
@@ -63,7 +66,7 @@ public class SceneSwitcherBackward : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[SceneSwitcherForward] SceneController.Instance is null!");
+            Debug.LogError("[SceneSwitcherBackward] SceneController.Instance is null!");
         }
     }
     private void Update()
@@ -77,20 +80,28 @@ public class SceneSwitcherBackward : MonoBehaviour
         }
     }
 
-    /// Hides the prompt UI and unsubscribes from the confirm action
-    private void HidePrompt()
-    {
-        if (promptUI != null)
-            promptUI.SetActive(false);
-
-        if (confirmAction != null)
-            confirmAction.action.Disable();
-    }
 
     /// Ensures the confirm action listener is cleaned up when the object is destroyed
     private void OnDestroy()
     {
         if (confirmAction != null)
             confirmAction.action.Disable();
+    }
+    private void OnEnable()
+    {
+        if (confirmAction != null)
+            confirmAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerInZone = false;
+        if (promptUI != null) promptUI.SetActive(false);
+    }
+
+    private void HidePrompt()
+    {
+        if (promptUI != null)
+            promptUI.SetActive(false);
     }
 }
